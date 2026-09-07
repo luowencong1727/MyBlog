@@ -1,5 +1,5 @@
 body {
-    background-color: rgba(223, 253, 255, 0.911);
+    background-color: rgba(248, 255, 255, 0.911);
     font-family: Arial, sans-serif;
 }
 #home-section {
@@ -15,8 +15,8 @@ body {
     color: rgba(11, 130, 116, 0.564);
     font-size: 22px;
     font-weight: bold;
-    border: 2px solid #000000;
-    border-radius: 1px;
-    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    padding: center;
     margin: auto;
 }
