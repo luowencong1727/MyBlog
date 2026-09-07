@@ -1,4 +1,22 @@
 body {
-    background-color: rgb(241, 241, 217);
-    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgba(223, 253, 255, 0.911);
+    font-family: Arial, sans-serif;
+}
+#home-section {
+    color: rgba(11, 130, 116, 0.564);
+    font-size: 22px;
+    font-weight: bold;
+    border: 2px solid #000000;
+    border-radius: 1px;
+    padding: 10px;
+    margin: auto;
+}
+.content-section{
+    color: rgba(11, 130, 116, 0.564);
+    font-size: 22px;
+    font-weight: bold;
+    border: 2px solid #000000;
+    border-radius: 1px;
+    padding: 10px;
+    margin: auto;
 }
