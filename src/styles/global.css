@@ -1,3 +1,7 @@
+nav a {
+    margin-right: 20px;
+}
+
 body {
     background-color: rgba(248, 255, 255, 0.911);
     font-family: Arial, sans-serif;
@@ -6,17 +10,39 @@ body {
     color: rgba(11, 130, 116, 0.564);
     font-size: 22px;
     font-weight: bold;
+    text-align: center;
+
     border: 2px solid #000000;
-    border-radius: 1px;
-    padding: 10px;
-    margin: auto;
+    border-radius: 10px;
+
+    margin: 30px;
+
+    padding-top: 12px;
+    padding-bottom: 7.5px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 .content-section{
     color: rgba(11, 130, 116, 0.564);
     font-size: 22px;
     font-weight: bold;
+    text-align: center;
+
     border: 1px solid #000000;
     border-radius: 10px;
-    padding: center;
-    margin: auto;
+
+    margin: 30px;
+
+    padding-top: 7.5px;
+    padding-bottom: 7.5px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+a:hover{
+    color: blue;
+}
+
+a {
+    color:black;
 }
