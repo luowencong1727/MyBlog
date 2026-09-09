@@ -1,5 +1,8 @@
 ---
 import "../styles/global.css";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog");
 ---
 
 <html lang="zh-CN">
@@ -29,13 +32,24 @@ import "../styles/global.css";
             </section>
                 
             <section class="content-section">
-                <h2>Programming AI Thoughts</h2>
+                {
+                    posts.map((post) => (
+                        <article>
+                            <h3>{post.data.title}</h3>
+
+                            <p>{post.data.description}</p>
+
+                            <p>{post.data.date.toLocaleDateString()}</p>
+                        </article>
+                    ))
+                }
             </section>
         </main>
         
         <footer id="footer">
-            <p>© 2026 Luo Wencong</p>
-            <a href="https://github.com/luowencong1727">Github</a>
+            <p><em>© 2026 Luo Wencong</em></p>
+            <p><em>Email:luowencong12@gmail.com</em></p>
+            <a href="https://github.com/luowencong1727"><em>Github</em></a>
         </footer>
     </body>
 </html>
