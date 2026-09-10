@@ -1,0 +1,62 @@
+---
+import { getEntry, render } from "astro:content";
+
+const { slug } = Astro.params;
+
+const post = await getEntry("blog", slug);
+
+if (!post) {
+    return Astro.redirect("/404");
+}
+
+const { Content } = await render(post);
+---
+
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+
+        <title>{post.data.title} | Luo Wencong</title>
+
+        <meta
+            name="description"
+            content={post.data.description}
+        />
+    </head>
+
+    <body>
+        <header>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/blog">Blog</a>
+                <a href="/projects">Projects</a>
+                <a href="/about">About</a>
+            </nav>
+        </header>
+
+        <main>
+            <article>
+                <h1>{post.data.title}</h1>
+
+                <p>{post.data.description}</p>
+
+                <p>
+                    {post.data.date.toLocaleDateString()}
+                </p>
+
+                <hr />
+
+                <Content />
+            </article>
+        </main>
+
+        <footer id="footer">
+            <p><em>© 2026 Luo Wencong</em></p>
+            <p><em>Email: luowencong12@gmail.com</em></p>
+            <a href="https://github.com/luowencong1727">
+                <em>Github</em>
+            </a>
+        </footer>
+    </body>
+</html>
