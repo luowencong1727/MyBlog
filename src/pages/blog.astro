@@ -35,8 +35,12 @@ const posts = await getCollection("blog");
                 {
                     posts.map((post) => (
                         <article>
-                            <h3>{post.data.title}</h3>
-
+                            <h3>
+                                <a href={`/blog/${post.id}`}>
+                                    {post.data.title}
+                                </a>
+                            </h3>
+                            
                             <p>{post.data.description}</p>
 
                             <p>{post.data.date.toLocaleDateString()}</p>
