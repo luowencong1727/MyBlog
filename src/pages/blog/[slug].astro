@@ -1,7 +1,11 @@
 ---
 import { getEntry, render } from "astro:content";
 
-const { slug } = Astro.params;
+const slug = Astro.params.slug;
+
+if (!slug) {
+    return Astro.redirect("/404");
+}
 
 const post = await getEntry("blog", slug);
 
