@@ -1,36 +1,32 @@
 ---
-import "../styles/global.css";
+import Layout from "../layouts/Layout.astro";
 ---
 
-<html lang="zh-CN">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
-        <title>Projects | Luo Wencong</title>
-        <meta
-            name="description"
-            content="Luo Wencong的编程与 AI 项目。"
-        />
-    </head>
+<Layout
+    title="Projects | Luo Wencong"
+    description="Luo Wencong 的编程与 AI 项目。"
+    active="projects"
+>
+    <header class="page-header">
+        <div class="page-kicker">
+            <span>PROJECT ARCHIVE</span>
+            <span>03 / PROJECTS</span>
+        </div>
+        <h1>项目档案</h1>
+        <p class="page-lede">
+            这里将整理我完成的编程项目、实验性工具和 AI 应用，并记录设计取舍与实现过程。
+        </p>
+    </header>
 
-    <body>
-        <header>
-            <nav>
-                <a href="/">Home</a>
-                <a href="/blog">Blog</a>
-                <a href="/projects">Projects</a>
-                <a href="/about">About</a>
-            </nav>
-        </header>
-
-        <main>
-            <h1>Projects</h1>
-        </main>
-        
-        <footer id="footer">
-            <p><em>© 2026 Luo Wencong</em></p>
-            <p><em>Email:luowencong12@gmail.com</em></p>
-            <a href="https://github.com/luowencong1727"><em>Github</em></a>
-        </footer>
-    </body>
-</html>
+    <section class="project-panel" aria-label="项目列表">
+        <div class="empty-panel">
+            <div class="empty-panel-inner">
+                <span class="empty-panel-code">STATUS / BUILDING</span>
+                <h2>项目记录正在建立</h2>
+                <p>
+                    目前还没有公开发布的项目条目。后续内容会按照与博客一致的结构持续补充。
+                </p>
+            </div>
+        </div>
+    </section>
+</Layout>

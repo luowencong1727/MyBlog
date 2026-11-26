@@ -1,52 +1,61 @@
 ---
-import "../styles/global.css";
+import Layout from "../layouts/Layout.astro";
 ---
 
-<html lang="zh-CN">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
-        <title>About | Luo Wencong</title>
-        <meta
-            name="description"
-            content="关于 Luo Wencong。"
-        />
-    </head>
-
-    <body>
-        <header>
-            <nav>
-                <a href="/">Home</a>
-                <a href="/blog">Blog</a>
-                <a href="/projects">Projects</a>
-                <a href="/about">About</a>
-            </nav>
+<Layout
+    title="About | Luo Wencong"
+    description="关于罗文聪，以及这个个人技术博客的建立初衷。"
+    active="about"
+>
+    <div class="about-page">
+        <header class="page-header">
+            <div class="page-kicker">
+                <span>ABOUT THIS SITE</span>
+                <span>04 / ABOUT</span>
+            </div>
+            <h1>关于我</h1>
+            <p class="page-lede">
+                记录学习过程、项目实践和阶段性思考，让零散的经验逐渐沉淀为可回看的知识。
+            </p>
         </header>
 
-        <main>
-            <section id="home-section">
-                <h1>About Me</h1>
-
-            </section>
-
-            <section class="content-section">
-                
-            </section>
-
-            <section class="content-section">
-                <h2>Why I Built This Website</h2>
-
+        <div class="about-layout">
+            <article class="about-copy">
+                <h2>我正在做什么</h2>
                 <p>
-                    我希望这里不仅仅是一个博客，
-                    也能够记录我的学习过程、项目和成长。
+                    我是罗文聪，目前正在学习数据结构、Linux、AI
+                    编程和软件开发。这个网站用于整理课程之外的学习内容，也用来记录那些还没有形成完整答案的问题。
                 </p>
-            </section>
 
-        </main>
-        <footer id="footer">
-            <p>© 2026 Luo Wencong</p>
-            <p><em>Email:</em>luowencong12@gmail.com</p>
-            <a href="https://github.com/luowencong1727">Github</a>
-        </footer>
-    </body>
-</html>
+                <h2>为什么建立这个网站</h2>
+                <p>
+                    我希望这里不仅仅是一个博客，也能够记录我的学习过程、项目和成长。相比只保留最终结果，我更希望留下问题是如何被拆解、方案为什么被选择，以及实现过程中遇到了哪些限制。
+                </p>
+
+                <h2>这里会写什么</h2>
+                <p>
+                    主要会发布技术笔记、项目复盘和个人思考。内容以代码和工程实践为主，尽量保持结构清楚、结论可验证，并明确区分已经完成的工作与仍在探索的方向。
+                </p>
+            </article>
+
+            <dl class="about-facts">
+                <div>
+                    <dt>FOCUS</dt>
+                    <dd>Code / Systems / AI</dd>
+                </div>
+                <div>
+                    <dt>MODE</dt>
+                    <dd>Learning in public</dd>
+                </div>
+                <div>
+                    <dt>SITE</dt>
+                    <dd>Astro + Cloudflare</dd>
+                </div>
+                <div>
+                    <dt>WRITING</dt>
+                    <dd>Notes, reviews, ideas</dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+</Layout>

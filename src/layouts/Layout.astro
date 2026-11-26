@@ -1,23 +1,216 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import { getCollection } from "astro:content";
+import "../styles/global.css";
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+type ActivePage = "home" | "blog" | "projects" | "about";
+
+interface Props {
+    title?: string;
+    description?: string;
+    active?: ActivePage;
+}
+
+const {
+    title = "Luo Wencong — Engineering Notes",
+    description = "罗文聪的个人技术博客，记录代码、系统、AI 与持续学习。",
+    active = "home",
+} = Astro.props;
+
+const posts = (await getCollection("blog")).sort(
+    (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+
+const currentPath = Astro.url.pathname.replace(/\/+$/, "") || "/";
+
+const navigation = [
+    { id: "home", number: "01", label: "Home", href: "/" },
+    { id: "blog", number: "02", label: "Blog", href: "/blog" },
+    { id: "projects", number: "03", label: "Projects", href: "/projects" },
+    { id: "about", number: "04", label: "About", href: "/about" },
+] as const;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="color-scheme" content="light" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+    </head>
+
+    <body>
+        <div class="site-shell">
+            <header class="site-header">
+                <a class="brand" href="/" aria-label="罗文聪个人网站首页">
+                    <span class="brand-monogram" aria-hidden="true">LW</span>
+                    <span class="brand-copy">
+                        <strong>Luo Wencong</strong>
+                        <span>Engineering notes</span>
+                    </span>
+                </a>
+
+                <div class="header-content">
+                    <nav class="top-nav" aria-label="主导航">
+                        {
+                            navigation.map((item) => (
+                                <a
+                                    class:list={{ "is-active": active === item.id }}
+                                    href={item.href}
+                                    aria-current={active === item.id ? "page" : undefined}
+                                >
+                                    <span>{item.number}</span>
+                                    {item.label}
+                                </a>
+                            ))
+                        }
+                    </nav>
+
+                    <div class="site-state" aria-label="网站索引状态">
+                        <span class="status-dot" aria-hidden="true"></span>
+                        <span>SITE INDEX / 2026</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="site-frame">
+                <aside class="content-directory" aria-label="网站内容目录">
+                    <div class="directory-heading">
+                        <span>DOCUMENT MAP</span>
+                        <span>2026</span>
+                    </div>
+
+                    <nav class="directory-tree" aria-label="内容索引">
+                        <details
+                            class="directory-group"
+                            open={active === "home" || active === "blog"}
+                        >
+                            <summary>
+                                <span class="directory-number">01</span>
+                                <span class="directory-label">所有博客</span>
+                                <span class="directory-count"
+                                    >{String(posts.length).padStart(2, "0")}</span
+                                >
+                                <svg
+                                    class="directory-chevron"
+                                    viewBox="0 0 16 16"
+                                    aria-hidden="true"
+                                >
+                                    <path d="m3 6 5 5 5-5" />
+                                </svg>
+                            </summary>
+
+                            <div class="directory-panel">
+                                <a
+                                    class:list={[
+                                        "directory-overview",
+                                        { "is-current": active === "blog" },
+                                    ]}
+                                    href="/blog"
+                                >
+                                    <span>00</span>
+                                    <span>文章归档</span>
+                                    <span aria-hidden="true">↗</span>
+                                </a>
+
+                                {
+                                    posts.map((post, index) => {
+                                        const postPath = `/blog/${post.id}`;
+
+                                        return (
+                                            <a
+                                                class:list={[
+                                                    "directory-entry",
+                                                    {
+                                                        "is-current":
+                                                            currentPath === postPath,
+                                                    },
+                                                ]}
+                                                href={postPath}
+                                                aria-current={
+                                                    currentPath === postPath
+                                                        ? "page"
+                                                        : undefined
+                                                }
+                                            >
+                                                <span>
+                                                    {String(index + 1).padStart(2, "0")}
+                                                </span>
+                                                <span>{post.data.title}</span>
+                                            </a>
+                                        );
+                                    })
+                                }
+                            </div>
+                        </details>
+
+                        <details
+                            class="directory-group"
+                            open={active === "projects"}
+                        >
+                            <summary>
+                                <span class="directory-number">02</span>
+                                <span class="directory-label">所有项目</span>
+                                <span class="directory-count">00</span>
+                                <svg
+                                    class="directory-chevron"
+                                    viewBox="0 0 16 16"
+                                    aria-hidden="true"
+                                >
+                                    <path d="m3 6 5 5 5-5" />
+                                </svg>
+                            </summary>
+
+                            <div class="directory-panel">
+                                <a
+                                    class:list={[
+                                        "directory-overview",
+                                        { "is-current": active === "projects" },
+                                    ]}
+                                    href="/projects"
+                                >
+                                    <span>00</span>
+                                    <span>项目归档</span>
+                                    <span aria-hidden="true">↗</span>
+                                </a>
+                                <p class="directory-empty">
+                                    暂无项目条目
+                                    <span>PROJECTS WILL APPEAR HERE</span>
+                                </p>
+                            </div>
+                        </details>
+                    </nav>
+
+                    <div class="directory-note">
+                        <span>READING MODE</span>
+                        <p>点击分类展开目录，选择文章进入阅读。</p>
+                    </div>
+                </aside>
+
+                <main class="main-shell">
+                    <div class="content-wrap">
+                        <slot />
+
+                        <footer class="site-footer">
+                            <p>© 2026 Luo Wencong</p>
+                            <div>
+                                <a href="mailto:luowencong12@gmail.com">Email</a>
+                                <a
+                                    href="https://github.com/luowencong1727"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    GitHub ↗
+                                </a>
+                            </div>
+                        </footer>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>
